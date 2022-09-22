@@ -16,7 +16,6 @@ app.use(express.json())
 app.use('/api', validation)
 app.use('/api', router)
 
-
 // error handling  
 app.use(errorHandler)
 
