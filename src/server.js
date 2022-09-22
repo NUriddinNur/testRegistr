@@ -9,21 +9,9 @@ import validation from './middleware/validation.js'
 dotenv.config()
 
 const PORT = process.env.PORT || 4006
-
 const app = express()
 
-
-
-const corsOptions ={
-    origin:'*', 
-    credentials:true,          
-    optionSuccessStatus:200,
-}
-
-
-console.log(corsOptions);
-app.use(cors(corsOptions))
-
+app.use(cors())
 app.use(express.json())
 app.use('/api', validation)
 app.use('/api', router)
