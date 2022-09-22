@@ -12,7 +12,11 @@ const PORT = process.env.PORT || 4006
 
 const app = express()
 
-app.use(cors())
+app.use(cors({
+    origin: "*",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    preflightContinue: false
+}))
 
 
 app.use(express.json())
