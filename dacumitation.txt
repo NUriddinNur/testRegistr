@@ -65,6 +65,12 @@ http://165.22.66.59:3003/api/user/login
 method POST
 body JSON
 
+yuboriladigan malumotlar
+{
+    email
+    password
+}
+
 Qaytadigan ma'lumotlar
 
 {
@@ -115,7 +121,7 @@ ________________________________________________________________________________
 
 http://165.22.66.59:3003/api/password-reset/{ userId }/{ Emailga yuborilgan tasdiqlash kodi }
 
-Elektron pochtaga yuborilgan kod va user id url orqali paramsqb yuboriladi 
+Elektron pochtaga yuborilgan kod va user id url orqali params qilib yuboriladi 
 
 method POST
 body JSON
