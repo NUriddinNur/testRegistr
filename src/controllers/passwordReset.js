@@ -23,7 +23,6 @@ class passwordReset {
             sendEmail(user.email, 'Parolni tiklash', token.token)
             return res.status(200).json({ status: 200, message: "Tasdiqlash kodi pochta manzilingizga yuborildi !", user })
         } catch (e) {
-            console.log(e);
             ApiError.internal(e.message)
         }
     }

@@ -14,7 +14,6 @@ class UserController {
         let checkEmail = await models.User.findOne({where: {email}})
         let checkUserAndEmail = await models.User.findOne({where: {[Op.and]: [{userName}, {email}]}})
 
-
         if(checkUserAndEmail) {
             return next(ApiError.badRequest('Bu elektron pochta va foydalanuvchi nomi allaqachon mavjud !'))
         }
@@ -24,7 +23,6 @@ class UserController {
         if(checkEmail) {
             return next(ApiError.badRequest('Bu elektron pochta allaqachon mavjud !'))
         }
-
 
         let user = await (await models.User.create({fullName, userName, email, phone, password: hashPassword})).toJSON()
         user.token = generateJwt(user.id)
@@ -65,19 +63,6 @@ class UserController {
 
         const users = await models.User.findAndCountAll({ attributes: ["id", "fullName", "userName", "phone", "email"], limit, offset})
         return res.status(200).json({message: 'Users !', status: 200, data: users})
-    }
-
-    async forgetPassword(req, res) {
-        let {email} = req.body
-
-        email = models.User.findOne({where: { email }})
-
-
-        if(email) {
-            return next(ApiError.badRequest("Email topilmadi !"))
-        }
-
-        console.log(email);
     }
 } 
 

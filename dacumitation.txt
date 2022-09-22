@@ -1,0 +1,133 @@
+http://165.22.66.59:3003/api/user
+
+method GET
+
+response = {
+    {
+    "message": "Users !",
+        "status": 200,
+            "data": {
+        "count": 1,
+            "rows": [
+                {
+                    "userId",
+                    "fullName",
+                    "userName",
+                    "phone",
+                    "email"
+                }
+            ]
+    }
+}
+}
+
+_____________________________________________________________________________________________________________
+http://165.22.66.59:3003/api/user/register
+
+method POST
+body JSON
+
+yuboriladigan ma'lumotlar
+{
+    "fullName": "test",
+    "userName": "test",
+    "password": "test",
+    "email": "test",
+    "phone": "test"
+}
+
+Qaytadigan ma'lumotlar
+
+{
+    "message",
+    "status",
+    "user": {
+        "userId",
+        "fullName",
+        "userName",
+        "email",
+        "phone",
+        "updatedAt",
+        "createdAt",
+        "token"
+    }
+}
+
+Yoki
+{
+    "status",
+    "message"
+}
+_____________________________________________________________________________________________________________
+
+http://165.22.66.59:3003/api/user/login
+
+method POST
+body JSON
+
+Qaytadigan ma'lumotlar
+
+{
+    "message",
+    "status",
+    "token"
+}
+
+Yoki
+{
+    "status",
+    "message"
+}
+
+__________________________________________________________________________________________________________________
+
+
+http://165.22.66.59:3003/api/password-reset
+
+method POST
+body JSON
+
+{
+    email
+}
+
+Qaytadigan ma'lumotlar
+{
+    "status": 200,
+    "message": "Tasdiqlash kodi pochta manzilingizga yuborildi !",
+    "user": {
+        "userId",
+        "fullName",
+        "userName",
+        "phone",
+        "email"
+    }
+}
+
+Yoki
+
+{
+    "status": 404,
+    "message": "Email topilmadi !"
+}
+
+______________________________________________________________________________________________________________________
+
+http://165.22.66.59:3003/api/password-reset/{ userId }/{ Emailga yuborilgan tasdiqlash kodi }
+
+Elektron pochtaga yuborilgan kod va user id url orqali paramsqb yuboriladi 
+
+method POST
+body JSON
+
+{
+    "password": "test",
+    "confirmPassword": "test"
+}
+
+Qaytadigan ma'lumotlar
+
+{
+    "status": 400,
+    "message": " So'rov natijasi qaytariladi "
+}
