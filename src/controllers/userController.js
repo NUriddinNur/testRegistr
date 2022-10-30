@@ -48,12 +48,6 @@ class UserController {
         return res.status(200).json({ message: "Foydalunivchi sahifasiga muvafaqiyatli kirildi !", status: 200, token })
     }
 
-
-    async check(req, res, next) {
-        const token = generateJwt(req.user.id, req.user.role)
-        return res.status(200).json({ status: 200, token})
-    }
-
     async getAll(req, res) {
 
         let {limit, page } = req.query

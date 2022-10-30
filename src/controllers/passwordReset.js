@@ -28,31 +28,35 @@ class passwordReset {
     }
 
     async resetPass(req, res, next) {
-
-        let user = await models.User.findOne({ where: { id: req.params.userId }, attributes: ["id", "fullName", "userName", "phone", "email"] })
-        if (!user) {
-            return next(ApiError.badRequest("User topilmadi !"))
+        try {
+            let user = await models.User.findOne({ where: { id: req.params.userId }, attributes: ["id", "fullName", "userName", "phone", "email"] })
+            if (!user) {
+                return next(ApiError.badRequest("User topilmadi !"))
+            }
+    
+            let token = await models.Token.findOne({ where: { token: req.params.token } })
+            if (!token) {
+                return next(ApiError.badRequest("Tasdiqlash kodi noto'g'ri !"))
+            }
+    
+            const {error} = RESET_PASS_INPUT.validate({ body: req.body})
+    
+            if(error) {
+                return next(ApiError.validationError(error.message))
+            }
+    
+            let {password} = req.body
+            const hashPassword = await bcrypt.hash(password, 2)
+    
+            user = await model.User.update(
+                {password: hashPassword},
+                {where: {id: user.id}}
+            )
+            return res.status(200).json({status: 200, message: "Parol o'zartirildi !"})
+        } catch(e) {
+            return next(ApiError.internal(e.message))
         }
 
-        let token = await models.Token.findOne({ where: { token: req.params.token } })
-        if (!token) {
-            return next(ApiError.badRequest("Tasdiqlash kodi noto'g'ri !"))
-        }
-
-        const {error} = RESET_PASS_INPUT.validate({ body: req.body})
-
-        if(error) {
-            return next(ApiError.validationError(error.message))
-        }
-
-        let {password} = req.body
-        const hashPassword = await bcrypt.hash(password, 2)
-
-        user = await model.User.update(
-            {password: hashPassword},
-            {where: {id: user.id}}
-        )
-        return res.status(200).json({status: 200, message: "Parol o'zartirildi !"})
     }
 }
 
